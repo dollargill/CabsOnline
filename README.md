@@ -40,11 +40,6 @@ Ensure you have PHP and MySQL installed on your server. This system is developed
 
 - **`login.php`**: Manages user login by verifying credentials against the database. Successful authentication forwards the user to the booking page.
 
-### Password Management
-
-- **`resetpwd.php`**: Initiates the password reset process by matching the input email against the database and sending an activation link.
-- **`activate.php`**: Confirms the activation link's validity before prompting for a new password.
-
 ### Booking
 
 - **`booking.php`**: Processes booking requests, validating input and saving to the database if the booking time is at least 1 hour in the future. A confirmation email is sent to the user.
