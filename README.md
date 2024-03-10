@@ -44,7 +44,6 @@ Ensure you have PHP and MySQL installed on your server. This system is developed
 
 - **`resetpwd.php`**: Initiates the password reset process by matching the input email against the database and sending an activation link.
 - **`activate.php`**: Confirms the activation link's validity before prompting for a new password.
-- **`newpwd.php`**: Saves the newly confirmed password and redirects to the login page.
 
 ### Booking
 
