@@ -6,7 +6,7 @@ CabsOnline is a web-based taxi booking system designed to facilitate easy taxi b
 
 ### Version Information
 
-- **Submitted by:** Dollar Karan Preet Singh
+- **Author:** Dollar Karan Preet Singh
 - **Student ID:** 104086732
 - **Version:** 1.0
 - **Date:** 10 March 2024
