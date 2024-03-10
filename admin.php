@@ -11,7 +11,7 @@
 
   <form action ="admin.php" method="post">
 
-<p><b>1. Click below button to search for all unassigned booking requests with a pick-up time within 2 hours</b><br></p>
+<p><b>1. Click below button to search for all unassigned booking requests with a pick-up time within 3 hours</b><br></p>
 	   <input type="submit" name="listall"  value="List all"><br>
   
 <?php 
@@ -32,7 +32,7 @@ if (isset($_POST['listall']))
 	{
 	$SQLstring = "SELECT booking.bookingno, customer.Name, booking.passname, booking.passphone, booking.unitno, booking.streetno, booking.streetname, booking.suburb, 
 	booking.destination, booking.PickupDateTime, booking.Systemstatus from booking join customer on booking.email = customer.email 
-	where (booking.Systemstatus = 'unassigned' and timestampdiff(Hour ,CURRENT_TIMESTAMP, `PickupDateTime`)<=2 )"; 
+	where (booking.Systemstatus = 'unassigned' and timestampdiff(Hour ,CURRENT_TIMESTAMP, `PickupDateTime`)<=3 )"; 
     	$queryResult = @mysqli_query($DBConnect, $SQLstring)
                     Or  die("<p>Unable to query the inventory table.</p>"."<p>Error code ". mysqli_errno($DBConnect). ": ".mysqli_error($DBConnect)). "</p>";
     

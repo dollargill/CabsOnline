@@ -1,5 +1,4 @@
-<head>
-
+<head> 
   <title>Booking</title> 
   <link rel="stylesheet" type="text/css" href="bookingstyle.css">
 </head> 
@@ -84,13 +83,9 @@
 			    });
 			  });
 			</script>
-			<footer>	
-  				<hr>
-  					<p>Author: Dollar Karan Preet Singh Student ID: 104086732 Version: 1.0 Date: 10 March 2024</p>
-  					<p>Designed and Developed with ❤️ by Dollar Karan Preet Singh. <br>&copy; 2024 Dollar Karan Preet Singh. All rights reserved.</p>
-			</footer>
-			</div>
-			</div>
+		
+</div>
+</div>
   </body> 
 
 <?php 
@@ -161,25 +156,31 @@ if (isset($_POST['submit']))
 	}
 
 // format the pickup date and time
-	date_default_timezone_set('UTC');
-	$today = time()+46800; /// + 13 hours adjustment for New Zealand Timezone
-	$pDateTime = strtotime("$pDate $pTime");
+date_default_timezone_set('Australia/Sydney');
+$today = time(); 
+$pDateTime = strtotime("$pDate $pTime");
+
 
 //validate pickup date & time 
-if (empty($pTime) or empty($pDate)) {echo "Please input the pick up date and time.<br>";}
-elseif ($pDate && $pTime) {
- 	$diff = ($pDateTime - $today)/3600; // calculate the difference in hours
-
-			if ($diff >= 0.9) { 
-			++$count;
-			$pDateTime = date('Y-m-d H:i:s', strtotime("$pDate $pTime"));
-			} else {
-			echo "The pickup time needs to be set at least 1 hour after the current time. Please adjust accordingly.<br>";
-			} 
-} else {
-echo "Please enter a valid pickup date & time.<br>";
+if (empty($pTime) or empty($pDate)) {
+    echo "Please input the pick up date and time.<br>";
 }
-	
+elseif ($pDate && $pTime) {
+    $pDateTime = strtotime("$pDate $pTime"); // Convert pickup date and time to timestamp
+    $today = time(); // Current time as timestamp
+    $diff = ($pDateTime - $today)/3600; // Calculate the difference in hours
+
+    if ($diff >= 0.667) { // Check if the difference is at least 40 minutes
+        ++$count;
+        $pDateTime = date('Y-m-d H:i:s', $pDateTime); // Re-format to SQL datetime format
+    } else {
+        echo "The pickup time needs to be set at least 40 minutes after the current time. Please adjust accordingly.<br>";
+    } 
+} else {
+    echo "Please enter a valid pickup date & time.<br>";
+}
+
+
 //retrieve session data
  	session_start();
 	if (isset($_SESSION['useremail'])) {
@@ -202,7 +203,7 @@ Or die ("<p>1.Unable to query the table.</p>"."<p>Error code ".mysqli_errno($DBC
 	$pickTime = date('H:i', strtotime($pTime));
 	$reply = "Your booking reference number is ".$msg[0].". We will pick up the
 	passengers from the provided address at ".$pickTime." on ".$pickDate."."; 
-	echo "Thank you! ".$reply; //comfirm the booking is success
+	echo "Thank you! ".$reply; 
 	sleep(3);
 	mysqli_close($DBConnect);
 	
@@ -215,7 +216,7 @@ mail($to, $subject, $message, $header);
 session_write_close();
 
 		} else {
-		echo "A system error may have occurred. We kindly ask you to book your taxi directly by calling us. We apologize for any inconvenience this may have caused."; //No booking info taken fm sql
+		echo "A system error may have occurred. We kindly ask you to book your taxi directly by calling us. We apologize for any inconvenience this may have caused."; 
 		exit;
 		}
 	} 
